@@ -1,0 +1,140 @@
+[
+    {
+        "title": "✨ Classic Mixed Case",
+        "input": { "nums": [-1, 0, 1, 2, -1, -4] },
+        "output": [[-1, -1, 2], [-1, 0, 1]],
+        "description": "A mix of positive ➕ and negative ➖ numbers producing multiple valid triplets 🎯"
+    },
+    {
+        "title": "🚫 No Valid Triplets",
+        "input": { "nums": [0, 1, 1] },
+        "output": [],
+        "description": "No combination sums to zero, so the result is empty ❌"
+    },
+    {
+        "title": "🟢 All Zeros",
+        "input": { "nums": [0, 0, 0] },
+        "output": [[0, 0, 0]],
+        "description": "All elements are zero, forming exactly one valid triplet ⚖️"
+    },
+    {
+        "title": "🔁 Duplicate Heavy Array",
+        "input": { "nums": [-2, 0, 0, 2, 2] },
+        "output": [[-2, 0, 2]],
+        "description": "Duplicates exist, but only unique triplets should appear 🔍"
+    },
+    {
+        "title": "📉 All Negative Numbers",
+        "input": { "nums": [-5, -4, -3, -2, -1] },
+        "output": [],
+        "description": "All numbers are negative, making zero-sum impossible ❌"
+    },
+    {
+        "title": "📈 All Positive Numbers",
+        "input": { "nums": [1, 2, 3, 4, 5] },
+        "output": [],
+        "description": "All numbers are positive, so no triplet can sum to zero 🚫"
+    },
+    {
+        "title": "⚖️ Balanced Small Array",
+        "input": { "nums": [-1, 0, 1] },
+        "output": [[-1, 0, 1]],
+        "description": "Smallest valid case with exactly one triplet 🎯"
+    },
+    {
+        "title": "🎲 Multiple Triplets",
+        "input": { "nums": [-2, -1, 0, 1, 2] },
+        "output": [[-2, 0, 2], [-1, 0, 1]],
+        "description": "Multiple combinations exist, each summing perfectly to zero ⚡"
+    },
+        {
+        "title": "🎯 Single Valid Triplet",
+        "input": { "nums": [-2, 1, 1] },
+        "output": [[-2, 1, 1]],
+        "description": "Exactly one combination balances to zero ⚖️"
+    },
+    {
+        "title": "🔄 Repeating Triplet Candidates",
+        "input": { "nums": [-1, -1, -1, 2, 2] },
+        "output": [[-1, -1, 2]],
+        "description": "Multiple duplicates exist, but only one unique triplet survives 🧹"
+    },
+    {
+        "title": "🧊 Zeros with Noise",
+        "input": { "nums": [0, 0, 0, 1, -1] },
+        "output": [[-1, 0, 1], [0, 0, 0]],
+        "description": "Zeros combine with others and among themselves ⚡"
+    },
+    {
+        "title": "⚡ Symmetric Range",
+        "input": { "nums": [-3, -2, -1, 0, 1, 2, 3] },
+        "output": [[-3, 0, 3], [-3, 1, 2], [-2, -1, 3], [-2, 0, 2], [-1, 0, 1]],
+        "description": "Perfectly balanced range creates multiple elegant triplets 🎨"
+    },
+    {
+        "title": "🎭 Mixed Duplicates",
+        "input": { "nums": [-4, -2, -2, 0, 2, 2, 4] },
+        "output": [[-4, 0, 4], [-4, 2, 2], [-2, -2, 4], [-2, 0, 2]],
+        "description": "Heavy duplication but still multiple unique answers 🔍"
+    },
+    {
+        "title": "📦 Minimal Size Boundary",
+        "input": { "nums": [1, -1, 0] },
+        "output": [[-1, 0, 1]],
+        "description": "Smallest valid input size with a correct triplet 🎯"
+    },
+    {
+        "title": "❄️ No Zero Despite Variety",
+        "input": { "nums": [-2, -1, 1, 2, 5] },
+        "output": [],
+        "description": "Looks promising but no combination hits zero ❌"
+    },
+    {
+        "title": "🧨 Large Magnitude Mix",
+        "input": { "nums": [-100000, 50000, 50000, 1, -1] },
+        "output": [[-100000, 50000, 50000], [-1, 0, 1]],
+        "description": "Includes extreme values and subtle smaller combinations ⚡"
+    },
+    {
+        "title": "🎢 Alternating Peaks",
+        "input": { "nums": [-5, 5, -4, 4, -3, 3, -2, 2, -1, 1] },
+        "output": [[-5, 0, 5], [-4, 0, 4], [-3, 0, 3], [-2, 0, 2], [-1, 0, 1]],
+        "description": "Pairs cancel out beautifully around zero 🎯"
+    },
+    {
+        "title": "🔍 Hidden Triplet",
+        "input": { "nums": [3, -2, 1, 0] },
+        "output": [],
+        "description": "Only four elements but still no valid triplet ❌"
+    },
+    {
+        "title": "🧮 Dense Combination Space",
+        "input": { "nums": [-2, -1, -1, 0, 1, 1, 2] },
+        "output": [[-2, 0, 2], [-2, 1, 1], [-1, -1, 2], [-1, 0, 1]],
+        "description": "Many overlapping combinations, but only unique ones count 🧠"
+    },
+    {
+        "title": "🪞 Mirror Values",
+        "input": { "nums": [-7, -3, 0, 3, 7] },
+        "output": [[-7, 0, 7], [-3, 0, 3]],
+        "description": "Perfect mirror symmetry creates clean triplets 🔄"
+    },
+    {
+        "title": "🎯 Centered Around Zero",
+        "input": { "nums": [-1, 0, 0, 1] },
+        "output": [[-1, 0, 1]],
+        "description": "Zero acts as the anchor for valid combinations ⚓"
+    },
+    {
+        "title": "🧱 No Triplet Despite Size",
+        "input": { "nums": [10, 20, -5, -6, 7] },
+        "output": [],
+        "description": "Larger numbers but still no valid zero-sum triplet 🚫"
+    },
+    {
+        "title": "🎉 Multiple Zero Combos",
+        "input": { "nums": [0, 0, 0, 0, 0] },
+        "output": [[0, 0, 0]],
+        "description": "Many zeros but only one unique triplet allowed 🧹"
+    }
+]
