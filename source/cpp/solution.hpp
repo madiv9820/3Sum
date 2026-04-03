@@ -6,7 +6,7 @@
 class Solution {
 public:
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
-        return std::vector<std::vector<int>> ();
+        return std::vector<std::vector<int>>();
     }
 };
 
