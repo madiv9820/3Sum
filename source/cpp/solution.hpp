@@ -2,11 +2,12 @@
 #define SOLUTION_HPP
 
 #include <vector>
+using namespace std;
 
 class Solution {
 public:
-    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
-        return std::vector<std::vector<int>>();
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        return vector<vector<int>> ();
     }
 };
 
