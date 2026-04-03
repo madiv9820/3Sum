@@ -92,13 +92,13 @@
     {
         "title": "🧨 Large Magnitude Mix",
         "input": { "nums": [-100000, 50000, 50000, 1, -1] },
-        "output": [[-100000, 50000, 50000], [-1, 0, 1]],
+        "output": [[-100000, 50000, 50000]],
         "description": "Includes extreme values and subtle smaller combinations ⚡"
     },
     {
         "title": "🎢 Alternating Peaks",
         "input": { "nums": [-5, 5, -4, 4, -3, 3, -2, 2, -1, 1] },
-        "output": [[-5, 0, 5], [-4, 0, 4], [-3, 0, 3], [-2, 0, 2], [-1, 0, 1]],
+        "output": [[-5, 1, 4], [-5, 2, 3], [-4, -1, 5], [-4, 1, 3], [-3, -2, 5], [-3, -1, 4], [-3, 1, 2], [-2, -1, 3]],
         "description": "Pairs cancel out beautifully around zero 🎯"
     },
     {
