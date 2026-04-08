@@ -1,79 +1,60 @@
-from typing import List, Set, Tuple
+from typing import List
 
 class pySolution:
     def py_threeSum(self, nums: List[int]) -> List[List[int]]:
-        # 🎯 Set to store UNIQUE triplets (as tuples)
-        # Automatically removes duplicates 🚫
-        triplets_With_Zero_Sum: Set[Tuple[int]] = set()
+        # 🎯 Final result list (no set needed since we handle duplicates inline)
+        triplets_With_Zero_Sum: List[List[int]] = []
 
-        # 🔁 Two Pointer based 2Sum
-        # Finds all pairs in nums[start_Index ... end_Index]
-        # such that their sum = required_Sum
-        def two_Sum(required_Sum: int, start_Index: int, end_Index: int) -> List[List[int]]:
-            
-            # 🎯 Store unique pairs
-            pairs_With_Required_Sum: Set[int] = set()
+        # 🔄 Sort the array (required for two-pointer approach + duplicate handling)
+        nums.sort()
+        n: int = len(nums)
+
+        # 🔁 Fix the first element of the triplet
+        for i in range(n):
+
+            # 🚫 Skip duplicate values for the first element
+            # Ensures we don't generate duplicate triplets
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
 
             # 👈👉 Initialize two pointers
+            start_Index: int = i + 1      # left pointer
+            end_Index: int = n - 1        # right pointer
+
+            # 🔁 Find pairs such that sum = -nums[i]
             while start_Index < end_Index:
 
-                # ➕ Current sum of two elements
-                current_Sum: int = nums[start_Index] + nums[end_Index]
+                # ➕ Current sum of triplet
+                current_Sum: int = nums[i] + nums[start_Index] + nums[end_Index]
 
-                # 🎯 Case 1: Found valid pair
-                if current_Sum == required_Sum:
+                # 🎯 Case 1: Found valid triplet
+                if current_Sum == 0:
 
-                    # 📥 Add pair to set (avoids duplicates)
-                    pairs_With_Required_Sum.add(
-                        tuple([nums[start_Index], nums[end_Index]])
-                    )
+                    # 📥 Add triplet to result
+                    triplets_With_Zero_Sum.append([
+                        nums[i], 
+                        nums[start_Index], 
+                        nums[end_Index]
+                    ])
 
-                    # 🔄 Move both pointers inward
+                    # ➡️ Move left pointer forward
                     start_Index += 1
-                    end_Index -= 1
+
+                    # 🚫 Skip duplicates for second element
+                    # Prevents repeating same triplet
+                    while (
+                        start_Index < end_Index and 
+                        nums[start_Index] == nums[start_Index - 1]
+                    ):
+                        start_Index += 1
 
                 # ⬆️ Case 2: Sum too large → decrease it
-                elif current_Sum > required_Sum:
+                elif current_Sum > 0:
                     end_Index -= 1
 
                 # ⬇️ Case 3: Sum too small → increase it
                 else:
                     start_Index += 1
 
-            # 🔄 Convert set → list of lists
-            return [list(pair) for pair in pairs_With_Required_Sum]
-
-        # 🔄 Sort array (required for two-pointer logic)
-        nums.sort()
-        n = len(nums)
-
-        # 🔁 Fix first element of triplet
-        for i in range(n - 2):
-
-            # 🎯 Now reduce 3Sum → 2Sum
-            # Find pairs such that: pair_sum = -nums[i]
-            required_Sum: int = 0 - nums[i]
-
-            pairs_With_Required_Sum: List[int] = two_Sum(
-                required_Sum = required_Sum, 
-                start_Index = i + 1,   # ensure different indices
-                end_Index = n - 1
-            )
-
-            # ✅ If valid pairs found
-            if len(pairs_With_Required_Sum) > 0:
-
-                # 🔁 Form triplets
-                for pair in pairs_With_Required_Sum:
-
-                    # ➕ Add fixed element to pair
-                    pair.append(nums[i])
-
-                    # 🔄 Sort for consistent ordering
-                    # 📥 Add to set to ensure uniqueness
-                    triplets_With_Zero_Sum.add(
-                        tuple(sorted(pair))
-                    )
-
-        # 🔄 Convert set → list of lists
-        return [list(triplet) for triplet in triplets_With_Zero_Sum]
+        # 🔄 Return all unique triplets
+        return triplets_With_Zero_Sum
