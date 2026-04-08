@@ -1,83 +1,125 @@
-# [🧩 3Sum — Find All Unique Triplets](https://leetcode.com/problems/3sum/description/?envType=study-plan-v2&envId=top-interview-150)
+# 🧩 3Sum Problem — Two Pointer Approach
 
-### 📖 Problem Statement
+### 💡 Intuition (How to Think About It) 🧠
 
-You are given an integer array **`nums`**. Your task is to find **all unique triplets** in the array such that:
+The key idea is:
 
-👉 The sum of the three numbers is equal to zero <br>
-👉 **`nums[i] + nums[j] + nums[k] == 0`**
+🔁 Convert **3Sum → 2Sum problem**
 
-### 🎯 Objective
-
-Return all distinct triplets **`[nums[i], nums[j], nums[k]]`** that satisfy the condition.
-
-#### ⚠️ Important Conditions
-- 📍 All indices must be **different** <br>
-→ **`i ≠ j`**, **`i ≠ k`**, **`j ≠ k`**
-- 🚫 The result must **not contain duplicate triplets**
-- 🔄 The **order of elements inside a triplet does not matter**
-- 🔀 The **order of triplets in the output does not matter**
-
-### 📌 Examples
-
-#### 🔹 Example 1
-
-- **Input:**
+Step-by-step thinking:
+1. Fix one element **`a`**
+2. Now find two numbers **`(b, c)`** such that:
     ```
-    nums = [-1, 0, 1, 2, -1, -4]
+    b + c = -a
     ```
 
-- **Output:**
-    ```
-    [[-1, -1, 2], [-1, 0, 1]]
-    ```
+#### 🚀 Why Two Pointers?
 
-- **Explanation:**
+Instead of checking all pairs (brute force ❌), we:
+- 🔄 Sort the array
+- 👈👉 Use two pointers to efficiently find pairs
 
-    The valid triplets that sum to zero are:
-    - [-1, 0, 1]
-    - [-1, -1, 2]
+### 🎯 Core Logic
 
-#### 🔹 Example 2
+After sorting:
+- Fix **`a = nums[i]`**
+- Initialize:
+    - **`left = i + 1`**
+    - **`right = n - 1`**
 
-- **Input:**
-    ```
-    nums = [0, 1, 1]
-    ```
+Now:
+- ➕ Compute **`current_sum = a + nums[left] + nums[right]`**
 
-- **Output:**
-    ```
-    []
-    ```
+#### ⚖️ Decision Making
 
-- **Explanation:** <br>
+| Condition             | Action                             |
+| --------------------- | ---------------------------------- |
+| **`current_sum == 0`** 🎯 | Found triplet → move both pointers |
+| **`current_sum < 0`** ⬇️  | Increase sum → move **`left`** ➡️      |
+| **`current_sum > 0`** ⬆️  | Decrease sum → move **`right`** ⬅️     |
 
-    No combination of three numbers results in a sum of zero.
+### 🧾 Pseudocode
 
-#### 🔹 Example 3
+```
+CREATE an empty set result_set
 
-- **Input:**
-    ```
-    nums = [0, 0, 0]
-    ```
+SORT nums
 
-- **Output:**
-    ```
-    [[0, 0, 0]]
-    ```
+LET n = length of nums
 
-- **Explanation:**
+FUNCTION two_sum(required_sum, left, right):
+    CREATE empty set pairs
 
-    The only possible triplet sums to zero.
+    WHILE left < right DO
+        current_sum = nums[left] + nums[right]
 
-### 🔒 Constraints
-- 📏 **`3 <= nums.length <= 3000`**
-- 🔢 **`-10⁵ <= nums[i] <= 10⁵`**
+        IF current_sum = required_sum THEN
+            ADD (nums[left], nums[right]) to pairs
+            left = left + 1
+            right = right - 1
 
-### 🧾 Summary
-- You are given an integer array
-- You must return **all unique triplets**
-- Each triplet must sum to **zero**
-- The result must contain **no duplicates**
+        ELSE IF current_sum < required_sum THEN
+            left = left + 1
+
+        ELSE
+            right = right - 1
+        END IF
+    END WHILE
+
+    RETURN pairs
+END FUNCTION
+
+
+FOR i = 0 TO n - 3 DO
+    required_sum = -nums[i]
+
+    pairs = two_sum(required_sum, i + 1, n - 1)
+
+    FOR each pair in pairs DO
+        triplet = pair + nums[i]
+        SORT triplet
+        ADD triplet to result_set
+    END FOR
+END FOR
+
+RETURN result_set as list
+```
+
+### 🧠 Key Insights
+
+- 🔄 Sorting enables **two-pointer traversal**
+- 👈👉 Two pointers reduce search space efficiently
+- 🔁 Avoids unnecessary nested loops
+- 📥 Set ensures unique triplets
+
+### ⏱️ Complexity Analysis
+
+| **Type**     | **Complexity**               |
+| -------- | ------------------------ |
+| ⏱️ Time  | **`O(n²)`** 🚀               |
+| 📦 Space | **`O(k)`** (unique triplets) |
+
+### ⚠️ Limitations (Current Implementation)
+
+- ❌ Uses extra space (set) for duplicate handling
+- ❌ Does not skip duplicates during traversal
+- ❌ Slightly less optimal than pure two-pointer version
+
+### 🚀 Next Improvement
+
+👉 Skip duplicates during traversal:
+- Skip duplicate **`nums[i]`**
+- Skip duplicate **`nums[left]`** and **`nums[right]`**
+
+This removes:
+- ❌ Need for set
+- 📉 Extra space usage
+
+### 🎯 Summary
+
+- ✔️ Efficient and widely used approach
+- ✔️ Reduces complexity to **`O(n²)`**
+- ✔️ Uses sorting + two pointers effectively
+- ⚠️ Can be further optimized by removing set
 
 ---
