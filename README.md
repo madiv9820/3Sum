@@ -1,83 +1,128 @@
-# [🧩 3Sum — Find All Unique Triplets](https://leetcode.com/problems/3sum/description/?envType=study-plan-v2&envId=top-interview-150)
+# 🧩 3Sum Problem — Binary Search Approach
 
-### 📖 Problem Statement
+### 💡 Intuition (How to Think About It) 🧠
 
-You are given an integer array **`nums`**. Your task is to find **all unique triplets** in the array such that:
+We know:
 
-👉 The sum of the three numbers is equal to zero <br>
-👉 **`nums[i] + nums[j] + nums[k] == 0`**
+🔍 3Sum can be reduced to **2Sum**
 
-### 🎯 Objective
+**Step-by-step thought process:**
+- Fix one element → **`a`**
+- Now the problem becomes:
 
-Return all distinct triplets **`[nums[i], nums[j], nums[k]]`** that satisfy the condition.
+    Find two numbers **`(b, c)`** such that <br>
+    **`b + c = -a`**
 
-#### ⚠️ Important Conditions
-- 📍 All indices must be **different** <br>
-→ **`i ≠ j`**, **`i ≠ k`**, **`j ≠ k`**
-- 🚫 The result must **not contain duplicate triplets**
-- 🔄 The **order of elements inside a triplet does not matter**
-- 🔀 The **order of triplets in the output does not matter**
+👉 Instead of checking all pairs (which leads to **`O(n³)`**), we can:
 
-### 📌 Examples
+- 🔄 **Sort the array**
+- 🔁 Fix two elements (**`a`**, **`b`**)
+- 🔍 Use **Binary Search** to find the third element **`c`**
 
-#### 🔹 Example 1
+#### 🎯 Key Idea
 
-- **Input:**
-    ```
-    nums = [-1, 0, 1, 2, -1, -4]
-    ```
+For every pair **`(a, b)`**, search for **`c = -(a + b)`** using binary search
 
-- **Output:**
-    ```
-    [[-1, -1, 2], [-1, 0, 1]]
-    ```
+This reduces unnecessary checks compared to brute force 🚀
 
-- **Explanation:**
+### 🛠️ Approach
 
-    The valid triplets that sum to zero are:
-    - [-1, 0, 1]
-    - [-1, -1, 2]
+1. 🔄 Sort the array
+2. 🔁 Fix the first element **`a`**
+3. 🔁 Find all valid pairs **`(b, c)`** such that:
+    - **`b + c = -a`**
+4. 🔍 Use **binary search** to find **`c`**
+5. 🔄 Sort triplets and store in a set to avoid duplicates
+6. 🔚 Convert set → list
 
-#### 🔹 Example 2
+### 🧾 Pseudocode
 
-- **Input:**
-    ```
-    nums = [0, 1, 1]
-    ```
+```
+CREATE an empty set result_set
 
-- **Output:**
-    ```
-    []
-    ```
+SORT nums
 
-- **Explanation:** <br>
+LET n = length of nums
 
-    No combination of three numbers results in a sum of zero.
+FUNCTION binary_search(target, left, right):
+    WHILE left <= right DO
+        mid = left + (right - left) / 2
 
-#### 🔹 Example 3
+        IF nums[mid] == target THEN
+            RETURN true
+        ELSE IF nums[mid] < target THEN
+            left = mid + 1
+        ELSE
+            right = mid - 1
+        END IF
+    END WHILE
 
-- **Input:**
-    ```
-    nums = [0, 0, 0]
-    ```
+    RETURN false
+END FUNCTION
 
-- **Output:**
-    ```
-    [[0, 0, 0]]
-    ```
 
-- **Explanation:**
+FUNCTION two_sum(required_sum, start, end):
+    CREATE empty list pairs
 
-    The only possible triplet sums to zero.
+    FOR i = start TO end DO
+        target = required_sum - nums[i]
 
-### 🔒 Constraints
-- 📏 **`3 <= nums.length <= 3000`**
-- 🔢 **`-10⁵ <= nums[i] <= 10⁵`**
+        IF binary_search(target, i + 1, end) THEN
+            pair = [nums[i], target]
+            SORT pair
+            ADD pair to pairs
+        END IF
+    END FOR
 
-### 🧾 Summary
-- You are given an integer array
-- You must return **all unique triplets**
-- Each triplet must sum to **zero**
-- The result must contain **no duplicates**
+    RETURN pairs
+END FUNCTION
+
+
+FOR i = 0 TO n - 3 DO
+    pairs = two_sum(-nums[i], i + 1, n - 1)
+
+    FOR each pair in pairs DO
+        triplet = pair + [nums[i]]
+        SORT triplet
+        ADD triplet to result_set
+    END FOR
+END FOR
+
+RETURN result_set as list
+```
+
+### 🧠 Key Insights
+
+- 🔄 Sorting enables **binary search**
+- 🔁 Reduces 3Sum → 2Sum problem
+- 🔍 Binary search avoids scanning entire array
+- 📥 Set ensures **unique triplets**
+
+### ⏱️ Complexity Analysis
+
+| **Type**     | **Complexity**               |
+| -------- | ------------------------ |
+| ⏱️ Time  | **`O(n² log n)`** ⚡          |
+| 📦 Space | **`O(k)`** (unique triplets) |
+
+### ⚠️ Limitations
+- ❌ Still slower than optimal solution
+- ❌ Extra **`log n`** factor due to binary search
+- ❌ Generates duplicate pairs (filtered later using set)
+
+### 🚀 Recommended Next Step
+
+👉 Move to **Two Pointer Approach**
+
+- Eliminates binary search
+- Handles duplicates efficiently
+- Industry-standard interview solution 💯
+
+### 🎯 Summary
+
+- ✔️ Improves over brute force
+- ✔️ Uses sorting + binary search effectively
+- ❌ Not the most optimal approach
+- ✔️ Great intermediate step toward optimal solution
 
 ---
