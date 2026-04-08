@@ -1,83 +1,92 @@
-# [🧩 3Sum — Find All Unique Triplets](https://leetcode.com/problems/3sum/description/?envType=study-plan-v2&envId=top-interview-150)
+# 🧩 3Sum Problem — Brute Force Approach
 
-### 📖 Problem Statement
+### 💡 Intuition (How to Think About It) 🧠
+At its core, this problem is about:
+    
+🔍 Finding **all combinations of 3 elements** whose sum equals zero
 
-You are given an integer array **`nums`**. Your task is to find **all unique triplets** in the array such that:
+The most straightforward idea is:
+- If we need **3 elements**, we can:
+    - Fix the first element
+    - Try all possible second elements
+    - Try all possible third elements
 
-👉 The sum of the three numbers is equal to zero <br>
-👉 **`nums[i] + nums[j] + nums[k] == 0`**
+👉 This naturally leads to **three nested loops** 🔁🔁🔁
 
-### 🎯 Objective
+#### ⚠️ Duplicate Problem
 
-Return all distinct triplets **`[nums[i], nums[j], nums[k]]`** that satisfy the condition.
+Different orders of the same numbers can create duplicate triplets:
 
-#### ⚠️ Important Conditions
-- 📍 All indices must be **different** <br>
-→ **`i ≠ j`**, **`i ≠ k`**, **`j ≠ k`**
-- 🚫 The result must **not contain duplicate triplets**
-- 🔄 The **order of elements inside a triplet does not matter**
-- 🔀 The **order of triplets in the output does not matter**
+```
+(-1, 0, 1) and (0, -1, 1)
+```
 
-### 📌 Examples
+To handle this:
+- 🔄 Always **sort each triplet**
+- 📥 Store results in a set to ensure uniqueness
 
-#### 🔹 Example 1
+### 🛠️ Approach: Brute Force
 
-- **Input:**
-    ```
-    nums = [-1, 0, 1, 2, -1, -4]
-    ```
+- Generate all possible triplets
+- Check if their sum is zero
+- Store only unique ones
 
-- **Output:**
-    ```
-    [[-1, -1, 2], [-1, 0, 1]]
-    ```
+### 🧾 Pseudocode
 
-- **Explanation:**
+```
+Initialize an empty set to store unique triplets
 
-    The valid triplets that sum to zero are:
-    - [-1, 0, 1]
-    - [-1, -1, 2]
+Let n = length of nums
 
-#### 🔹 Example 2
+For i from 0 to n-3:
+    For j from i+1 to n-2:
+        For k from j+1 to n-1:
 
-- **Input:**
-    ```
-    nums = [0, 1, 1]
-    ```
+            If nums[i] + nums[j] + nums[k] == 0:
 
-- **Output:**
-    ```
-    []
-    ```
+                Create a triplet [nums[i], nums[j], nums[k]]
 
-- **Explanation:** <br>
+                Sort the triplet
 
-    No combination of three numbers results in a sum of zero.
+                Convert it into a tuple (so it can be stored in a set)
 
-#### 🔹 Example 3
+                Add it to the set
 
-- **Input:**
-    ```
-    nums = [0, 0, 0]
-    ```
+Convert the set into a list of lists
 
-- **Output:**
-    ```
-    [[0, 0, 0]]
-    ```
+Return the result
+```
 
-- **Explanation:**
+### 🧠 Key Insights
 
-    The only possible triplet sums to zero.
+- **🔁 Three loops** → explore all combinations
+- **🔄 Sorting triplets** → ensures consistency
+- **📥 Set usage** → removes duplicates automatically
 
-### 🔒 Constraints
-- 📏 **`3 <= nums.length <= 3000`**
-- 🔢 **`-10⁵ <= nums[i] <= 10⁵`**
+### ⏱️ Complexity Analysis
 
-### 🧾 Summary
-- You are given an integer array
-- You must return **all unique triplets**
-- Each triplet must sum to **zero**
-- The result must contain **no duplicates**
+| **Type**     | **Complexity**               |
+| -------- | ------------------------ |
+| ⏱️ Time  | **`O(n³)`** 🐢               |
+| 📦 Space | **`O(k)`** (unique triplets) |
+
+### ⚠️ Limitations
+
+- ❌ Very slow for large inputs
+- ❌ Not optimized for interviews
+- ❌ Repeats unnecessary work
+
+### 🆚 What’s Next? 🚀
+
+👉 The optimal solution uses:
+
+- Sorting + Two Pointers
+- Reduces complexity to **`O(n²)`** ⚡
+
+### 🎯 Summary
+
+- ✔️ Simple and intuitive approach
+- ✔️ Great for understanding the problem
+- ❌ Not efficient for real-world usage
 
 ---
